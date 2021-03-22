@@ -19,10 +19,10 @@ function initCountrySelections(countriesUrl) {
 
 function showStats() {
     country = selecttions.value
-    console.log(country)
+    // console.log(country)
     url = `https://api.covid19api.com/live/country/${country}`
     getData(url).then(data => {
-        console.log(data)
+        // console.log(data)
         parseNumbers(data)
     })
 

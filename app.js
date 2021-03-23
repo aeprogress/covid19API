@@ -1,5 +1,10 @@
 let selecttions = document.getElementById('inputGroupSelect03')
-let url = 'https://api.covid19api.com/live/country/saudi-arabia'
+let active = document.getElementById('active')
+let recovered = document.getElementById('recovered')
+let confirmed = document.getElementById('confirmed')
+let deaths = document.getElementById('deaths')
+let updated = document.getElementById('updated')
+let url = 'https://api.covid19api.com/live/country/'
 const countriesUrl = 'https://api.covid19api.com/countries'
 
 async function getData(url) {
@@ -8,14 +13,14 @@ async function getData(url) {
     return jData
 }
 
-function initCountrySelections(countriesUrl) {
+(function (countriesUrl) {
     getData(countriesUrl).then(data => data.sort().forEach(element => {
         let option = document.createElement("option");
         option.text = element['Country'];
         option.value = element['Country'];
         selecttions.append(option)
     }))
-}
+}(countriesUrl))()
 
 function showStats() {
     country = selecttions.value
@@ -29,12 +34,6 @@ function showStats() {
 }
 
 function parseNumbers(data) {
-    let active = document.getElementById('active')
-    let recovered = document.getElementById('recovered')
-    let confirmed = document.getElementById('confirmed')
-    let deaths = document.getElementById('deaths')
-    let updated = document.getElementById('updated')
-
     try{
 
         active.innerHTML = data[data.length-1]['Active']
@@ -50,5 +49,3 @@ function parseNumbers(data) {
         deaths.innerHTML = 'Not available'
     }
 }
-
-initCountrySelections(countriesUrl)

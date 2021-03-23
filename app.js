@@ -4,7 +4,6 @@ let recovered = document.getElementById('recovered')
 let confirmed = document.getElementById('confirmed')
 let deaths = document.getElementById('deaths')
 let updated = document.getElementById('updated')
-let url = 'https://api.covid19api.com/live/country/'
 const countriesUrl = 'https://api.covid19api.com/countries'
 
 async function getData(url) {
@@ -16,21 +15,16 @@ async function getData(url) {
 (function (countriesUrl) {
     getData(countriesUrl).then(data => data.sort().forEach(element => {
         let option = document.createElement("option");
-        option.text = element['Country'];
-        option.value = element['Country'];
+        option.text = element['Country']
+        option.value = element['Country']
         selecttions.append(option)
     }))
 }(countriesUrl))()
 
 function showStats() {
     country = selecttions.value
-    // console.log(country)
     url = `https://api.covid19api.com/live/country/${country}`
-    getData(url).then(data => {
-        // console.log(data)
-        parseNumbers(data)
-    })
-
+    getData(url).then(data => parseNumbers(data)) /* console.log(data)*/
 }
 
 function parseNumbers(data) {

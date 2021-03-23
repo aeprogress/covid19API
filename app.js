@@ -30,7 +30,7 @@ function showStats() {
     getData(url).then(data => {
         parseNumbers(data)
         loading.setAttribute('hidden', '')
-    }) /* console.log(data)*/
+    })
 }
 
 function parseNumbers(data) {

@@ -12,14 +12,14 @@ async function getData(url) {
     return jData
 }
 
-(function (countriesUrl) {
-    getData(countriesUrl).then(data => data.sort().forEach(element => {
+(function (url) {
+    getData(url).then(data => data.sort().forEach(element => {
         let option = document.createElement("option");
         option.text = element['Country']
         option.value = element['Country']
         selecttions.append(option)
     }))
-}(countriesUrl))()
+}(countriesUrl))
 
 function showStats() {
     country = selecttions.value

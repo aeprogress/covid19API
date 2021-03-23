@@ -4,9 +4,11 @@ let recovered = document.getElementById('recovered')
 let confirmed = document.getElementById('confirmed')
 let deaths = document.getElementById('deaths')
 let updated = document.getElementById('updated')
+let loading = document.getElementById('loading')
 const countriesUrl = 'https://api.covid19api.com/countries'
 
 async function getData(url) {
+    loading.removeAttribute('hidden')
     const data = await fetch(url)
     let jData = await data.json()
     return jData
@@ -18,13 +20,17 @@ async function getData(url) {
         option.text = element['Country']
         option.value = element['Country']
         selecttions.append(option)
+        loading.setAttribute('hidden', '')
     }))
 }(countriesUrl))
 
 function showStats() {
     country = selecttions.value
     url = `https://api.covid19api.com/live/country/${country}`
-    getData(url).then(data => parseNumbers(data)) /* console.log(data)*/
+    getData(url).then(data => {
+        parseNumbers(data)
+        loading.setAttribute('hidden', '')
+    }) /* console.log(data)*/
 }
 
 function parseNumbers(data) {
